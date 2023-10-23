@@ -11,8 +11,8 @@ export default class ArraySchema {
     const validator = (value) => {
       const iter = (currentValue, currentDepth = 0) => {
         if (!Array.isArray(currentValue)) return currentDepth - 1;
-        const array = currentValue.flatMap((e) => iter(e, currentDepth + 1));
-        return Math.max(...array);
+        const depths = currentValue.flatMap((e) => iter(e, currentDepth + 1));
+        return Math.max(...depths);
       };
       return iter(value) <= depth;
     };
